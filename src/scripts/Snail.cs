@@ -33,7 +33,7 @@ public partial class Snail : Area2D
 
         GD.Print($"colidiu com {body.Name}");
 
-        if (body.Name == "Player" && body is Player player && player.IsAlive)
+        if (body is Player player && player.IsAlive)
         {
             EmitSignal(SignalName.PlayerDead, body);
         }

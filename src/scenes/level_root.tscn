@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://deep8yedjdc25"]
+[gd_scene load_steps=8 format=4 uid="uid://deep8yedjdc25"]
 
 [ext_resource type="Texture2D" uid="uid://dxev1ad20dv3d" path="res://src/assets/images/Tilemap/Terrain (16x16).png" id="1_5pr2n"]
 [ext_resource type="Texture2D" uid="uid://dletkqnaon643" path="res://src/assets/images/Background/Green.png" id="1_7s6g8"]
 [ext_resource type="PackedScene" uid="uid://bkcsww5qek4tj" path="res://src/scenes/player.tscn" id="2_wp87h"]
 [ext_resource type="PackedScene" uid="uid://cdib2g4i0ttip" path="res://src/scenes/snail.tscn" id="4_c6sbx"]
+[ext_resource type="PackedScene" uid="uid://cfrujaew7gos6" path="res://src/scenes/apple.tscn" id="5_oj0e7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smoe0"]
 texture = ExtResource("1_5pr2n")
@@ -192,3 +193,21 @@ scale = Vector2(0.35, 0.35)
 [node name="Snail2" parent="enemies" instance=ExtResource("4_c6sbx")]
 position = Vector2(183, 212.333)
 scale = Vector2(0.35, 0.35)
+
+[node name="apples" type="Node2D" parent="."]
+
+[node name="Apple" parent="apples" instance=ExtResource("5_oj0e7")]
+position = Vector2(403.333, 195.333)
+scale = Vector2(1, 1)
+
+[node name="Apple2" parent="apples" instance=ExtResource("5_oj0e7")]
+position = Vector2(128.667, 195)
+scale = Vector2(1, 1)
+
+[node name="Apple3" parent="apples" instance=ExtResource("5_oj0e7")]
+position = Vector2(26.6667, 74.3333)
+scale = Vector2(1, 1)
+
+[node name="Apple4" parent="apples" instance=ExtResource("5_oj0e7")]
+position = Vector2(367.667, 75)
+scale = Vector2(1, 1)
