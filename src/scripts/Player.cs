@@ -7,8 +7,17 @@ public partial class Player : CharacterBody2D
     private int _jumpVelocity = -850;
 
     private bool _isAlive = true;
+    private bool _isCanMove = true;
 
     public bool IsAlive => _isAlive;
+    public bool IsCanMove
+    {
+        get => _isCanMove;
+        set
+        {
+            _isCanMove = value;
+        }
+    }
 
     private AnimatedSprite2D _animatedSprite;
 
@@ -45,32 +54,35 @@ public partial class Player : CharacterBody2D
             _animatedSprite.Play("jump");
 
         }
-
-        if (Input.IsActionJustPressed("move_jump") && IsOnFloor())
+        if (IsCanMove)
         {
-            velocity.Y = _jumpVelocity;
-            _soundJump.Play();
+            if (Input.IsActionJustPressed("move_jump") && IsOnFloor())
+            {
+                velocity.Y = _jumpVelocity;
+                _soundJump.Play();
 
+            }
+
+            //pega o input do jogador, se ele estiver pressionando para a direita ou para a esquerda, ele vai multiplicar o valor do input pela velocidade do player
+            var direction = Input.GetAxis("move_left", "move_right");
+
+            //se o jogador estiver pressionando para a direita ou para a esquerda, ele vai aplicar a velocidade do player na direção do input, caso contrário, ele vai diminuir a velocidade do player até chegar em 0
+            if (direction != 0)
+                velocity.X = Mathf.MoveToward(velocity.X, direction * _speed, aceleretion * (float)delta);
+            else
+                velocity.X = Mathf.MoveToward(velocity.X, 0, decceleration * (float)delta);
+
+            Velocity = velocity;
+
+            MoveAndSlide();
+
+            if (direction > 0)
+                _animatedSprite.FlipH = false;
+
+            else if (direction < 0)
+                _animatedSprite.FlipH = true;
         }
 
-        //pega o input do jogador, se ele estiver pressionando para a direita ou para a esquerda, ele vai multiplicar o valor do input pela velocidade do player
-        var direction = Input.GetAxis("move_left", "move_right");
-
-        //se o jogador estiver pressionando para a direita ou para a esquerda, ele vai aplicar a velocidade do player na direção do input, caso contrário, ele vai diminuir a velocidade do player até chegar em 0
-        if (direction != 0)
-            velocity.X = Mathf.MoveToward(velocity.X, direction * _speed, aceleretion * (float)delta);
-        else
-            velocity.X = Mathf.MoveToward(velocity.X, 0, decceleration * (float)delta);
-
-        Velocity = velocity;
-
-        MoveAndSlide();
-
-        if (direction > 0)
-            _animatedSprite.FlipH = false;
-
-        else if (direction < 0)
-            _animatedSprite.FlipH = true;
     }
 
 
